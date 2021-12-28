@@ -8,5 +8,7 @@ namespace Data.Repository
     {
         public Task<IEnumerable<T>> GetAllAsync();
         public Task<T> findByIdAsync(Guid id);
+        public Task<T> deleteByIdAsync(Guid id);
+        public Task<T> updateAsync(T entity);
     }
 }

@@ -10,16 +10,27 @@ namespace Business.Service.impl
 {
     public class DepartmentService : IDepartmentService
     {
-        private IDepartmentRepository _departmentRepository;
+        private IDepartmentRepository departmentRepository;
 
         public DepartmentService(IDepartmentRepository departmentRepository)
         {
-            this._departmentRepository = departmentRepository;
+            this.departmentRepository = departmentRepository;
+        }
+
+        public async Task<DepartmentDTO> deleteByIdAsync(Guid id)
+        {
+            Department department = await departmentRepository.deleteByIdAsync(id);
+            if (department != null)
+            {
+                DepartmentDTO dto = Mapper.GetMapper().Map<DepartmentDTO>(department);
+                return dto;
+            }
+            return null;
         }
 
         public async Task<DepartmentDTO> findByIdAsync(Guid id)
         {
-            Department department = await _departmentRepository.findByIdAsync(id);
+            Department department = await departmentRepository.findByIdAsync(id);
             if (department != null)
             {
                 DepartmentDTO dto = Mapper.GetMapper().Map<DepartmentDTO>(department);
@@ -32,7 +43,7 @@ namespace Business.Service.impl
         public async Task<List<Department>> GetAllAsync()
         {
             List<Department> departments = new List<Department>();
-            IEnumerable<Department> departmentsENums = await _departmentRepository.GetAllAsync();
+            IEnumerable<Department> departmentsENums = await departmentRepository.GetAllAsync();
             foreach(Department department in departmentsENums)
             {
                 departments.Add(department);
