@@ -8,5 +8,7 @@ namespace Data.Database
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Department> departments { get; set; }
+
+        public DbSet<Staff> staffs { get; set; }
     }
 }
