@@ -27,6 +27,7 @@ namespace Business.Service.impl
             {
                 Staff staff = Mapper.GetMapper().Map<Staff>(dto);
                 staff.id = Guid.NewGuid();
+                staff.status = true;
                 Staff insertedStaff = await staffRepository.addAsync(staff);
                 return Mapper.GetMapper().Map<StaffDTO>(insertedStaff);
             }

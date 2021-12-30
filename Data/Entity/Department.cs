@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Entity
 {
@@ -15,8 +11,11 @@ namespace Data.Entity
         [Column("Id")]
         public Guid id { get; set; }
 
-        [Column("name")]
+        [Column("Name")]
         public string name { get; set; }
+
+        [Column("Status")]
+        public bool status { get; set; }
 
     }
 }

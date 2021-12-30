@@ -21,6 +21,7 @@ namespace Business.Service.impl
         {
             Department department = Mapper.GetMapper().Map<Department>(dto);
             department.id = Guid.NewGuid();
+            department.status = true;
             Department insertedDep = await departmentRepository.addAsync(department);
             return Mapper.GetMapper().Map<DepartmentDTO>(insertedDep);
         }

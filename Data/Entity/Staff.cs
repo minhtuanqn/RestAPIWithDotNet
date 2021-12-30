@@ -23,5 +23,8 @@ namespace Data.Entity
         [Column("DepartmentId")]
         public Guid departmentId { get; set; }
 
+        [Column("Status")]
+        public bool status { get; set; }
+
     }
 }
