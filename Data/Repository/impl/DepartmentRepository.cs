@@ -5,11 +5,11 @@ namespace Data.Repository.impl
 {
     public class DepartmentRepository : GenericRepository<Department>,IDepartmentRepository
     {
-        private readonly AppDbContext _dbContext;
+        private readonly AppDbContext dbContext;
 
         public DepartmentRepository(AppDbContext dbContext) : base(dbContext)
         {
-            this._dbContext = dbContext;
+            this.dbContext = dbContext;
         }
     }
 }

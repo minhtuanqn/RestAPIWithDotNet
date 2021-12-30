@@ -63,9 +63,53 @@ namespace Data.Repository
                     EntityEntry entry = entities.Remove(entity);
                     if(entry.State == EntityState.Deleted)
                     {
-                        dbContext.SaveChanges();
+                        await dbContext.SaveChangesAsync();
                         return (T)entry.Entity;
                     }
+                }
+                return null;
+            }
+            catch(Exception e)
+            {
+                if(dbContext != null)
+                {
+                    await dbContext.DisposeAsync();
+                }
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task<T> addAsync(T entity)
+        {
+            try
+            {
+                EntityEntry entry = await entities.AddAsync(entity);
+                if(entry.State == EntityState.Added)
+                {
+                    await dbContext.SaveChangesAsync();
+                    return (T)entry.Entity;
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                if(dbContext != null)
+                {
+                    await dbContext.DisposeAsync();
+                }
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task<T> updateAsync(T entity)
+        {
+            try
+            {
+                EntityEntry entry = entities.Update(entity);
+                if(entry.State == EntityState.Modified)
+                {
+                    await dbContext.SaveChangesAsync();
+                    return (T)entry.Entity;
                 }
                 return null;
             }

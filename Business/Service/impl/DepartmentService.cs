@@ -17,6 +17,26 @@ namespace Business.Service.impl
             this.departmentRepository = departmentRepository;
         }
 
+        public async Task<DepartmentDTO> createAsync(DepartmentDTO dto)
+        {
+            Department department = Mapper.GetMapper().Map<Department>(dto);
+            department.id = Guid.NewGuid();
+            Department insertedDep = await departmentRepository.addAsync(department);
+            return Mapper.GetMapper().Map<DepartmentDTO>(insertedDep);
+        }
+
+        public async Task<DepartmentDTO> updateAsync(DepartmentDTO dto)
+        {
+            Department existedDep = await departmentRepository.findByIdAsync(dto.id);
+            if(existedDep != null)
+            {
+                existedDep.name = dto.name;
+                Department updatedDep = await departmentRepository.updateAsync(existedDep);
+                return Mapper.GetMapper().Map<DepartmentDTO>(updatedDep);
+            }
+            return null;   
+        }
+
         public async Task<DepartmentDTO> deleteByIdAsync(Guid id)
         {
             Department department = await departmentRepository.deleteByIdAsync(id);
@@ -40,13 +60,14 @@ namespace Business.Service.impl
             return null;
         }
 
-        public async Task<List<Department>> GetAllAsync()
+        public async Task<List<DepartmentDTO>> GetAllAsync()
         {
-            List<Department> departments = new List<Department>();
+            List<DepartmentDTO> departments = new List<DepartmentDTO>();
             IEnumerable<Department> departmentsENums = await departmentRepository.GetAllAsync();
             foreach(Department department in departmentsENums)
             {
-                departments.Add(department);
+                DepartmentDTO dto = Mapper.GetMapper().Map<DepartmentDTO>(department);
+                departments.Add(dto);
             }
             return departments;
         }

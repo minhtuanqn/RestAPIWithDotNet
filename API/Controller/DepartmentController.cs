@@ -1,6 +1,5 @@
 ﻿using Business.Dto;
 using Business.Service;
-using Data.Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,19 +18,18 @@ namespace API.Controller
             this.departmentService = departmentService;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             try
             {
-                List<Department> departments = await departmentService.GetAllAsync();
-                return new JsonResult(departments);
-
+                List<DepartmentDTO> departments = await departmentService.GetAllAsync();
+                return new JsonResult(new ResponseModelDTO(200, departments, "Find successfully"));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new JsonResult(null);
+                return new JsonResult(new ResponseModelDTO(400, new List<DepartmentDTO>(), "Error"));
             }
 
         }
@@ -41,12 +39,12 @@ namespace API.Controller
         {
             try
             {
-                DepartmentDTO dto = await departmentService.findByIdAsync(id);
-                if(dto != null)
+                DepartmentDTO existedDTO = await departmentService.findByIdAsync(id);
+                if(existedDTO != null)
                 {
-                    return new JsonResult(new ResponseModelDTO(200, dto, "Find successfully"));
+                    return new JsonResult(new ResponseModelDTO(200, existedDTO, "Find successfully"));
                 }    
-                return new JsonResult(new ResponseModelDTO(400, dto, "Not found any result"));
+                return new JsonResult(new ResponseModelDTO(400, existedDTO, "Not found any result"));
 
             }
             catch (Exception e)
@@ -74,6 +72,42 @@ namespace API.Controller
                 return new JsonResult(new ResponseModelDTO(400, null, "Error"));
             }
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(DepartmentDTO dto)
+        {
+            try
+            {
+                DepartmentDTO createdDep = await departmentService.createAsync(dto);
+                if(createdDep != null)
+                {
+                    return new JsonResult(new ResponseModelDTO(200, createdDep, "Create successfully"));
+                }
+                return new JsonResult(new ResponseModelDTO(400, createdDep, "Bad request"));
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new ResponseModelDTO(400, null, "Error"));
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(DepartmentDTO dto)
+        {
+            try
+            {
+                DepartmentDTO updatedDep = await departmentService.updateAsync(dto);
+                if (updatedDep != null)
+                {
+                    return new JsonResult(new ResponseModelDTO(200, updatedDep, "Update successfully"));
+                }
+                return new JsonResult(new ResponseModelDTO(400, updatedDep, "Bad request"));
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new ResponseModelDTO(400, null, "Error"));
+            }
         }
     }
 }

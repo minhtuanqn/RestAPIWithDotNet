@@ -18,7 +18,5 @@ namespace Data.Entity
         [Column("name")]
         public string name { get; set; }
 
-        [Column("NumOfStaff")]
-        public int numOfStaff { get; set; }
     }
 }
