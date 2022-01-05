@@ -56,9 +56,12 @@ namespace API.Config.Middleware
             try
             {
                 SecurityToken validatedToken = new TokenHelper().ValidateToken(_configuration, token);
-                var jwtToken = (JwtSecurityToken) validatedToken;
-                var accountId = jwtToken.Claims.First(x => x.Type == "id").Value;
-                context.Items["User"] = new { id = accountId };
+                JwtSecurityToken jwtToken = (JwtSecurityToken) validatedToken;
+                string accountId = jwtToken.Claims.First(x => x.Type == "ID").Value;
+                string accountEmail = jwtToken.Claims.First(x => x.Type == "EMAIL").Value;
+                string accountRole = jwtToken.Claims.First(x => x.Type == "ROLE").Value; 
+
+                context.Items["User"] = new { id = accountId, email = accountEmail, role = accountRole };
             }
             catch (Exception e)
             {

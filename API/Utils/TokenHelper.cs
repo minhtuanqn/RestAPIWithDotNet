@@ -15,8 +15,9 @@ namespace API.Utils
         {
             var credentials = GetCredentials(configuration);
             var permClaims = new List<Claim>();
-            permClaims.Add(new Claim("id", dto.id.ToString()));
-            permClaims.Add(new Claim("email", dto.email));
+            permClaims.Add(new Claim("ID", dto.id.ToString()));
+            permClaims.Add(new Claim("EMAIL", dto.email));
+            permClaims.Add(new Claim("ROLE", dto.role));
             var token = new JwtSecurityToken(configuration["Jwt:Issuer"],
               configuration["Jwt:Issuer"],
               permClaims,
@@ -27,13 +28,13 @@ namespace API.Utils
 
         public SecurityToken ValidateToken(IConfiguration configuration, string token)
         {
-            var handler = new JwtSecurityTokenHandler();
-            // lay securityKey từ appsetting json
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
-            // check token so với security
+
+            // check token with security
             try
             {
-                ClaimsPrincipal claims = handler.ValidateToken(token, new TokenValidationParameters
+                ClaimsPrincipal claims = new JwtSecurityTokenHandler()
+                    .ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = true,
@@ -50,7 +51,7 @@ namespace API.Utils
             }
         }
 
-        // Generate securityKey từ Key trong Config sau đó mã hóa ra
+        // Generate securityKey from Key in Config and then encode
         public SigningCredentials GetCredentials(IConfiguration configuration)
         {
 
@@ -58,7 +59,6 @@ namespace API.Utils
             return new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         }
 
-        // Generate Claim
         public ClaimsPrincipal getClaims(string token, IConfiguration configuration)
         {
             var handler = new JwtSecurityTokenHandler();

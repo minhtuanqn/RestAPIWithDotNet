@@ -100,8 +100,8 @@ namespace API
             app.UseMiddleware<JWTMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

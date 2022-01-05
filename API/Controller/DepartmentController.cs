@@ -1,14 +1,17 @@
-﻿using Business.Dto;
+﻿using API.Config.Authorization;
+using Business.Dto;
 using Business.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Business.Const;
 
 namespace API.Controller
 {
     [Route("api/departments")]
     [ApiController]
+    [AuthorizationCustom(new RoleEnum[] { RoleEnum.DEPARTMENT_ADMIN })]
     public class DepartmentController
     {
         private readonly IDepartmentService departmentService;
