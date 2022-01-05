@@ -37,7 +37,7 @@ namespace Data.Repository
             }
         }
 
-        public async Task<T> findByIdAsync(Guid key)
+        public async Task<T> FindByIdAsync(Guid key)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Data.Repository
             }
         }
 
-        public async Task<T> deleteByIdAsync(Guid key)
+        public async Task<T> DeleteByIdAsync(Guid key)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Data.Repository
             }
         }
 
-        public async Task<T> addAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Data.Repository
             }
         }
 
-        public async Task<T> updateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             try
             {

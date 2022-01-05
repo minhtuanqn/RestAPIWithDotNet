@@ -12,8 +12,8 @@ namespace Business.Utils
             {
                 cfg.CreateMap<Department, DepartmentDTO>();
                 cfg.CreateMap<DepartmentDTO, Department>();
-                cfg.CreateMap<Staff, StaffDTO>();
-                cfg.CreateMap<StaffDTO, Staff>();
+                cfg.CreateMap<User, UserDTO>();
+                cfg.CreateMap<UserDTO, User>();
             });
             return configuration.CreateMapper();
         }

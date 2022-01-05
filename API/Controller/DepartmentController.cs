@@ -39,7 +39,7 @@ namespace API.Controller
         {
             try
             {
-                DepartmentDTO existedDTO = await departmentService.findByIdAsync(id);
+                DepartmentDTO existedDTO = await departmentService.FindByIdAsync(id);
                 if(existedDTO != null)
                 {
                     return new JsonResult(new ResponseModelDTO(200, existedDTO, "Find successfully"));
@@ -59,7 +59,7 @@ namespace API.Controller
         {
             try
             {
-                DepartmentDTO dto = await departmentService.deleteByIdAsync(id);
+                DepartmentDTO dto = await departmentService.DeleteByIdAsync(id);
                 if (dto != null)
                 {
                     return new JsonResult(new ResponseModelDTO(200, dto, "Delete successfully"));
@@ -79,7 +79,7 @@ namespace API.Controller
         {
             try
             {
-                DepartmentDTO createdDep = await departmentService.createAsync(dto);
+                DepartmentDTO createdDep = await departmentService.CreateAsync(dto);
                 if(createdDep != null)
                 {
                     return new JsonResult(new ResponseModelDTO(200, createdDep, "Create successfully"));
@@ -97,7 +97,7 @@ namespace API.Controller
         {
             try
             {
-                DepartmentDTO updatedDep = await departmentService.updateAsync(dto);
+                DepartmentDTO updatedDep = await departmentService.UpdateAsync(dto);
                 if (updatedDep != null)
                 {
                     return new JsonResult(new ResponseModelDTO(200, updatedDep, "Update successfully"));

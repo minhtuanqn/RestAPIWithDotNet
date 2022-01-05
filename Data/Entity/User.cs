@@ -4,12 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entity
 {
-    [Table("Staff")]
-    public class Staff
+    [Table("User")]
+    public class User
     {
         [Key]
         [Column("Id")]
         public Guid id { get; set; }
+
+        [Column("Email")]
+        public string email { get; set; }
 
         [Column("FirstName")]
         public string firstName { get; set; }

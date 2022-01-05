@@ -7,9 +7,9 @@ namespace Data.Repository
     public interface IGenericRepository<T>
     {
         public Task<IEnumerable<T>> GetAllAsync();
-        public Task<T> findByIdAsync(Guid id);
-        public Task<T> deleteByIdAsync(Guid id);
-        public Task<T> addAsync(T entity);
-        public Task<T> updateAsync(T entity);
+        public Task<T> FindByIdAsync(Guid id);
+        public Task<T> DeleteByIdAsync(Guid id);
+        public Task<T> AddAsync(T entity);
+        public Task<T> UpdateAsync(T entity);
     }
 }

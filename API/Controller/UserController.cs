@@ -3,19 +3,18 @@ using Business.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controller
 {
-    [Route("api/staffs")]
+    [Route("api/users")]
     [ApiController]
-    public class StaffController
+    public class UserController
     {
-        private readonly IStaffService staffService;
-        public StaffController(IStaffService staffService)
+        private readonly IUserService userService;
+        public UserController(IUserService userService)
         {
-            this.staffService = staffService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -23,13 +22,13 @@ namespace API.Controller
         {
             try
             {
-                List<StaffDTO> staffs = await staffService.GetAllAsync();
-                return new JsonResult(new ResponseModelDTO(200, staffs, "Find successfully"));
+                List<UserDTO> users = await userService.GetAllAsync();
+                return new JsonResult(new ResponseModelDTO(200, users, "Find successfully"));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new JsonResult(new ResponseModelDTO(400, new List<StaffDTO>(), "Error"));
+                return new JsonResult(new ResponseModelDTO(400, new List<UserDTO>(), "Error"));
             }
 
         }
@@ -39,7 +38,7 @@ namespace API.Controller
         {
             try
             {
-                StaffDTO existedDTO = await staffService.findByIdAsync(id);
+                UserDTO existedDTO = await userService.FindByIdAsync(id);
                 if (existedDTO != null)
                 {
                     return new JsonResult(new ResponseModelDTO(200, existedDTO, "Find successfully"));
@@ -59,7 +58,7 @@ namespace API.Controller
         {
             try
             {
-                StaffDTO dto = await staffService.deleteByIdAsync(id);
+                UserDTO dto = await userService.DeleteByIdAsync(id);
                 if (dto != null)
                 {
                     return new JsonResult(new ResponseModelDTO(200, dto, "Delete successfully"));
@@ -75,16 +74,16 @@ namespace API.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(StaffDTO dto)
+        public async Task<IActionResult> Create(UserDTO dto)
         {
             try
             {
-                StaffDTO createdStaff = await staffService.createAsync(dto);
-                if (createdStaff != null)
+                UserDTO createdUser = await userService.CreateAsync(dto);
+                if (createdUser != null)
                 {
-                    return new JsonResult(new ResponseModelDTO(200, createdStaff, "Create successfully"));
+                    return new JsonResult(new ResponseModelDTO(200, createdUser, "Create successfully"));
                 }
-                return new JsonResult(new ResponseModelDTO(400, createdStaff, "Bad request"));
+                return new JsonResult(new ResponseModelDTO(400, createdUser, "Bad request"));
             }
             catch (Exception e)
             {
@@ -93,16 +92,16 @@ namespace API.Controller
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(StaffDTO dto)
+        public async Task<IActionResult> Update(UserDTO dto)
         {
             try
             {
-                StaffDTO updatedStaff = await staffService.updateAsync(dto);
-                if (updatedStaff != null)
+                UserDTO updatedUser = await userService.UpdateAsync(dto);
+                if (updatedUser != null)
                 {
-                    return new JsonResult(new ResponseModelDTO(200, updatedStaff, "Update successfully"));
+                    return new JsonResult(new ResponseModelDTO(200, updatedUser, "Update successfully"));
                 }
-                return new JsonResult(new ResponseModelDTO(400, updatedStaff, "Bad request"));
+                return new JsonResult(new ResponseModelDTO(400, updatedUser, "Bad request"));
             }
             catch (Exception e)
             {

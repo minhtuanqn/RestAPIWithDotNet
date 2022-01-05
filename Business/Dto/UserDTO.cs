@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace Business.Dto
 {
-    public class StaffDTO
+    public class UserDTO
     {
         public Guid id { get; set; }
 
         [Required]
         public string firstName { get; set; }
+
+        [Required]
+        public string email { get; set; }
 
         [Required]
         public string lastName { get; set; }

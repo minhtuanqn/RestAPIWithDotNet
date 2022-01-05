@@ -9,6 +9,6 @@ namespace Data.Database
 
         public DbSet<Department> departments { get; set; }
 
-        public DbSet<Staff> staffs { get; set; }
+        public DbSet<User> users { get; set; }
     }
 }

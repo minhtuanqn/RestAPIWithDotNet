@@ -9,10 +9,10 @@ namespace Business.Service
     public interface IDepartmentService
     {
         public Task<List<DepartmentDTO>> GetAllAsync();
-        public Task<DepartmentDTO> findByIdAsync(Guid id);
-        public Task<DepartmentDTO> createAsync(DepartmentDTO dto);
-        public Task<DepartmentDTO> deleteByIdAsync(Guid id);
-        public Task<DepartmentDTO> updateAsync(DepartmentDTO dto);
+        public Task<DepartmentDTO> FindByIdAsync(Guid id);
+        public Task<DepartmentDTO> CreateAsync(DepartmentDTO dto);
+        public Task<DepartmentDTO> DeleteByIdAsync(Guid id);
+        public Task<DepartmentDTO> UpdateAsync(DepartmentDTO dto);
     }
 
 }

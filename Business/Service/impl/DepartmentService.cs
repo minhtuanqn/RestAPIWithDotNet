@@ -17,30 +17,30 @@ namespace Business.Service.impl
             this.departmentRepository = departmentRepository;
         }
 
-        public async Task<DepartmentDTO> createAsync(DepartmentDTO dto)
+        public async Task<DepartmentDTO> CreateAsync(DepartmentDTO dto)
         {
             Department department = Mapper.GetMapper().Map<Department>(dto);
             department.id = Guid.NewGuid();
             department.status = true;
-            Department insertedDep = await departmentRepository.addAsync(department);
+            Department insertedDep = await departmentRepository.AddAsync(department);
             return Mapper.GetMapper().Map<DepartmentDTO>(insertedDep);
         }
 
-        public async Task<DepartmentDTO> updateAsync(DepartmentDTO dto)
+        public async Task<DepartmentDTO> UpdateAsync(DepartmentDTO dto)
         {
-            Department existedDep = await departmentRepository.findByIdAsync(dto.id);
+            Department existedDep = await departmentRepository.FindByIdAsync(dto.id);
             if(existedDep != null)
             {
                 existedDep.name = dto.name;
-                Department updatedDep = await departmentRepository.updateAsync(existedDep);
+                Department updatedDep = await departmentRepository.UpdateAsync(existedDep);
                 return Mapper.GetMapper().Map<DepartmentDTO>(updatedDep);
             }
             return null;   
         }
 
-        public async Task<DepartmentDTO> deleteByIdAsync(Guid id)
+        public async Task<DepartmentDTO> DeleteByIdAsync(Guid id)
         {
-            Department department = await departmentRepository.deleteByIdAsync(id);
+            Department department = await departmentRepository.DeleteByIdAsync(id);
             if (department != null)
             {
                 DepartmentDTO dto = Mapper.GetMapper().Map<DepartmentDTO>(department);
@@ -49,9 +49,9 @@ namespace Business.Service.impl
             return null;
         }
 
-        public async Task<DepartmentDTO> findByIdAsync(Guid id)
+        public async Task<DepartmentDTO> FindByIdAsync(Guid id)
         {
-            Department department = await departmentRepository.findByIdAsync(id);
+            Department department = await departmentRepository.FindByIdAsync(id);
             if (department != null)
             {
                 DepartmentDTO dto = Mapper.GetMapper().Map<DepartmentDTO>(department);
