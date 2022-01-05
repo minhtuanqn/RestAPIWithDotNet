@@ -24,6 +24,9 @@ namespace Business.Dto
         public int age { get; set; }
 
         [Required]
+        public string role { get; set; }
+
+        [Required]
         public Guid departmentId { get; set; }
 
     }

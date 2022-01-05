@@ -23,6 +23,9 @@ namespace Data.Entity
         [Column("Age")]
         public int age { get; set; }
 
+        [Column("Role")]
+        public string role { get; set; }
+
         [Column("DepartmentId")]
         public Guid departmentId { get; set; }
 
