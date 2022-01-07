@@ -15,10 +15,12 @@ namespace API.Controller
     public class DepartmentController
     {
         private readonly IDepartmentService departmentService;
+        private readonly IUserService userService;
 
-        public DepartmentController(IDepartmentService departmentService)
+        public DepartmentController(IDepartmentService departmentService, IUserService userService)
         {
             this.departmentService = departmentService;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -106,6 +108,24 @@ namespace API.Controller
                     return new JsonResult(new ResponseModelDTO(200, updatedDep, "Update successfully"));
                 }
                 return new JsonResult(new ResponseModelDTO(400, updatedDep, "Bad request"));
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new ResponseModelDTO(400, null, "Error"));
+            }
+        }
+
+        [HttpGet("{id}/users")]
+        public async Task<IActionResult> GettUsersByDepartmentId(Guid id)
+        {
+            try
+            {
+                List<UserDTO> users = await userService.GetAllByDepartmentIdAsync(id);
+                if (users != null)
+                {
+                    return new JsonResult(new ResponseModelDTO(200, users, "OK"));
+                }
+                return new JsonResult(new ResponseModelDTO(400, null, "Bad request"));
             }
             catch (Exception e)
             {

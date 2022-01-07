@@ -27,7 +27,7 @@ namespace API.Controller
         {
             try
             {
-                UserDTO dto = await userService.FindByEmail(email);
+                UserDTO dto = await userService.FindByEmailAsync(email);
                 if(dto != null)
                 {
                     string token = new TokenHelper().BuildToken(config, dto);

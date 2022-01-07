@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,6 @@ namespace Data.Entity
         [Column("Status")]
         public bool status { get; set; }
 
+        public virtual ICollection<User> users { get; set; } 
     }
 }

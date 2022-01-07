@@ -12,6 +12,8 @@ namespace Business.Service
         public Task<UserDTO> CreateAsync(UserDTO dto);
         public Task<UserDTO> DeleteByIdAsync(Guid id);
         public Task<UserDTO> UpdateAsync(UserDTO dto);
-        public Task<UserDTO> FindByEmail(string email);
+        public Task<UserDTO> FindByEmailAsync(string email);
+        public Task<List<UserDTO>> GetAllByDepartmentIdAsync(Guid id);
+
     }
 }

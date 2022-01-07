@@ -32,5 +32,7 @@ namespace Data.Entity
         [Column("Status")]
         public bool status { get; set; }
 
+        public virtual Department department { get; set; }
+
     }
 }

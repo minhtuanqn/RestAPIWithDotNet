@@ -1,5 +1,4 @@
 ﻿using Business.Dto;
-using Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,6 +12,7 @@ namespace Business.Service
         public Task<DepartmentDTO> CreateAsync(DepartmentDTO dto);
         public Task<DepartmentDTO> DeleteByIdAsync(Guid id);
         public Task<DepartmentDTO> UpdateAsync(DepartmentDTO dto);
+        
     }
 
 }

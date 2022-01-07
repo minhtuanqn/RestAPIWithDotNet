@@ -45,9 +45,9 @@ namespace Business.Service.impl
             return null;
         }
 
-        public async Task<UserDTO> FindByEmail(string email)
+        public async Task<UserDTO> FindByEmailAsync(string email)
         {
-            User user = await userRepository.FindByEmail(email);
+            User user = await userRepository.FindByEmailAsync(email);
             if (user != null)
             {
                 UserDTO dto = Mapper.GetMapper().Map<UserDTO>(user);
@@ -94,6 +94,26 @@ namespace Business.Service.impl
                     existedUser.departmentId = dto.departmentId;
                     User updatedUser = await userRepository.UpdateAsync(existedUser);
                     return Mapper.GetMapper().Map<UserDTO>(updatedUser);
+                }
+            }
+            return null;
+        }
+
+        public async Task<List<UserDTO>> GetAllByDepartmentIdAsync(Guid departmentId)
+        {
+            Department existedDep = await departmentRepository.FindByIdAsync(departmentId);
+            if (existedDep != null)
+            {
+                List<UserDTO> users = new List<UserDTO>();
+                List<User> usersList = await userRepository.GetAllByDepartmentIdAsync(departmentId);
+                if (usersList != null)
+                {
+                    foreach (User user in usersList)
+                    {
+                        UserDTO dto = Mapper.GetMapper().Map<UserDTO>(user);
+                        users.Add(dto);
+                    }
+                    return users;
                 }
             }
             return null;
