@@ -16,15 +16,6 @@ pipeline {
         sh "dotnet restore ${workspace}\\Staff_Management_test\\StaffManagement.sln"
       }
     }
-    stage('Clean') {
-      steps {
-        sh "msbuild.exe ${workspace}\\Staff_Management_test\\StaffManagement.sln" /nologo /nr:false /p:platform=\"x64\" /p:configuration=\"release\" /t:clean"
-      }
-    }
-    stage('Running unit tests') {
-      steps {
-        sh "dotnet test  ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj"
-      }        
-    }
+    
   }
 }
