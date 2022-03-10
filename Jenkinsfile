@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Running unit tests') {
     steps {
-        dotnet test
+        bat "dotnet test"
       }        
     }
   }
