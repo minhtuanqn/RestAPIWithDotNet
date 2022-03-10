@@ -14,7 +14,7 @@ pipeline {
     stage('Running unit tests') {
       steps {
         sh "dotnet dev-certs https --trust"
-        sh "dotnet test  ${workspace}/Staff_Management_test/StaffManagement.UnitTest/UnitTest1.cs"
+        sh "dotnet test  ${workspace}/Staff_Management_test/StaffManagement.UnitTest"
       }        
     }
   }
