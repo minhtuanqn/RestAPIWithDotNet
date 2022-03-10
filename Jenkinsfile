@@ -13,12 +13,12 @@ pipeline {
     }
     stage('Restore packages') {
       steps {
-        bat "dotnet restore ${workspace}\\Staff_Management_test\\StaffManagement.sln"
+        sh "dotnet restore ${workspace}\\Staff_Management_test\\StaffManagement.sln"
       }
     }
     stage('Clean') {
       steps {
-        bat "msbuild.exe ${workspace}\\Staff_Management_test\\StaffManagement.sln" /nologo /nr:false /p:platform=\"x64\" /p:configuration=\"release\" /t:clean"
+        sh "msbuild.exe ${workspace}\\Staff_Management_test\\StaffManagement.sln" /nologo /nr:false /p:platform=\"x64\" /p:configuration=\"release\" /t:clean"
       }
     }
     stage('Running unit tests') {
