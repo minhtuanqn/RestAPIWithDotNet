@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Running unit tests') {
       steps {
-        bat "dotnet test  ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj"
+        sh "dotnet test  ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj"
       }        
     }
   }
