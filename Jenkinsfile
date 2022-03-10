@@ -6,7 +6,9 @@ pipeline {
         cleanWs()
       }
     }
+    stage ('Git Checkout') {
+      git branch: 'main', credentialsId: '5dfe18e3-6fea-484f-9693-96c3bd62057e', url: 'https://github.com/minhtuanqn/RestAPIWithDotNet.git'
+    }
   }
-  stage ('Git Checkout') {
-  }
+  
 }
