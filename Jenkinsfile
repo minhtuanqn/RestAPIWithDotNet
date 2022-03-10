@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+        msbuild '.NET Core 2.0.0'
+    }
   stages {
     stage ('Clean workspace') {
       steps {
