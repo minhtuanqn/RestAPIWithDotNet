@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Running unit tests') {
       steps {
-        dotnet test ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj
+        
       }        
     }
   }
