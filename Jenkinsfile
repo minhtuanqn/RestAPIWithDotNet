@@ -13,6 +13,7 @@ pipeline {
     }
     stage('Running unit tests') {
       steps {
+        sh "export PATH=${PATH}:${HOME}/.dotnet/tools"
         sh "dotnet test  ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj"
       }        
     }
