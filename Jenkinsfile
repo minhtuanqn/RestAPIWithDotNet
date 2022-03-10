@@ -13,8 +13,7 @@ pipeline {
     }
     stage('Running unit tests') {
       steps {
-        dotnet add ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj package JUnitTestLogger --version 1.1.0
-        dotnet test ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj --logger \"junit;LogFilePath=\"${WORKSPACE}\"/TestResults/1.0.0.\"${env.BUILD_NUMBER}\"/results.xml\" --configuration release --collect \"Code coverage\"
+        dotnet test ${workspace}/Staff_Management_test/StaffManagement.UnitTest/StaffManagement.UnitTest.csproj
       }        
     }
   }
